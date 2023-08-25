@@ -12,6 +12,8 @@ const temp = weatherDiv.querySelector('.temp-val');
 const text = weatherDiv.querySelector('.text');
 const city = weatherDiv.querySelector('.city');
 
+const errorMsg = document.querySelector('.error p');
+
 const detailsDiv = weatherDiv.querySelector('.details');
 const humidity = detailsDiv.querySelector('.humidity-val');
 const windSpeed = detailsDiv.querySelector('.wind-val');
@@ -21,6 +23,9 @@ async function getWeatherData(location) {
     mode: 'cors'
   });
   const weatherData = await response.json();
+  if (!response.ok) {
+    throw new Error(weatherData.error.message);
+  }
   return {
     icon: `https:${weatherData.current.condition.icon}`,
     text: weatherData.current.condition.text,
@@ -43,6 +48,12 @@ function displayWeather() {
       windSpeed.textContent = obj.wind;
 
       weatherDiv.style.display = 'block';
+      errorMsg.textContent = '';
+    })
+    .catch((error) => {
+      console.error(error);
+      errorMsg.textContent = error.message;
+      weatherDiv.style.display = 'none';
     })
 }
 

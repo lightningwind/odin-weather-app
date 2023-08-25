@@ -113,3 +113,10 @@ h3.city {
 .link-back {
   margin-top: 50px;
 }
+
+.error {
+  text-align: left;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+}
