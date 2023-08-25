@@ -71,10 +71,14 @@ h1.temp {
   font-weight: 500;
 }
 
-h2.city {
-  font-size: 45px;
+h2.text {
   font-weight: 400;
-  margin-top: -10px;
+}
+
+h3.city {
+  /* font-size: 45px; */
+  font-weight: 400;
+  margin-top: 8px;
 }
 
 .details {
