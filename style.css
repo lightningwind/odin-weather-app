@@ -105,3 +105,11 @@ h3.city {
   font-size: 28px;
   margin-top: -6px;
 }
+
+.weather {
+  display: none;
+}
+
+.link-back {
+  margin-top: 50px;
+}

@@ -2,7 +2,7 @@ const API_KEY = '6b3cc77dc2ce411a96604927231708';
 const baseURL = 'https://api.weatherapi.com/v1';
 const apiMethod = '/current.json';
 
-const form = document.querySelector('.search');
+const form = document.querySelector('form');
 const input = form.querySelector('input');
 const btn = form.querySelector('button');
 
@@ -16,7 +16,7 @@ const detailsDiv = weatherDiv.querySelector('.details');
 const humidity = detailsDiv.querySelector('.humidity-val');
 const windSpeed = detailsDiv.querySelector('.wind-val');
 
-async function checkWeather(location) {
+async function getWeatherData(location) {
   const response = await fetch(`${baseURL}${apiMethod}?key=${API_KEY}&q=${location}`, {
     mode: 'cors'
   });
@@ -33,15 +33,16 @@ async function checkWeather(location) {
 }
 
 function displayWeather() {
-  checkWeather(input.value)
+  getWeatherData(input.value)
     .then((obj) => {
-      console.log(obj)
       icon.src = obj.icon;
       temp.textContent = Math.round(obj.temp_c);
       text.textContent = obj.text;
       city.textContent = obj.city;
       humidity.textContent = obj.humidity;
       windSpeed.textContent = obj.wind;
+
+      weatherDiv.style.display = 'block';
     })
 }
 
