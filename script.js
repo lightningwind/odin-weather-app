@@ -2,19 +2,19 @@ const API_KEY = '6b3cc77dc2ce411a96604927231708';
 const baseURL = 'https://api.weatherapi.com/v1';
 const apiMethod = '/current.json';
 
-const searchDiv = document.querySelector('.search');
-const input = searchDiv.querySelector('input');
-const btn = searchDiv.querySelector('button');
+const form = document.querySelector('.search');
+const input = form.querySelector('input');
+const btn = form.querySelector('button');
 
 const weatherDiv = document.querySelector('.weather');
 const icon = weatherDiv.querySelector('.weather-icon');
-const temp = weatherDiv.querySelector('.temp');
+const temp = weatherDiv.querySelector('.temp-val');
 const text = weatherDiv.querySelector('.text');
 const city = weatherDiv.querySelector('.city');
 
 const detailsDiv = weatherDiv.querySelector('.details');
-const humidity = detailsDiv.querySelector('.humidity');
-const windSpeed = detailsDiv.querySelector('.wind');
+const humidity = detailsDiv.querySelector('.humidity-val');
+const windSpeed = detailsDiv.querySelector('.wind-val');
 
 async function checkWeather(location) {
   const response = await fetch(`${baseURL}${apiMethod}?key=${API_KEY}&q=${location}`, {
@@ -33,10 +33,19 @@ async function checkWeather(location) {
 }
 
 function displayWeather() {
-  // TODO
+  checkWeather(input.value)
+    .then((obj) => {
+      console.log(obj)
+      icon.src = obj.icon;
+      temp.textContent = Math.round(obj.temp_c);
+      text.textContent = obj.text;
+      city.textContent = obj.city;
+      humidity.textContent = obj.humidity;
+      windSpeed.textContent = obj.wind;
+    })
 }
 
-checkWeather('Vancouver')
-  .then((obj) => {
-    console.log(obj);
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    displayWeather();
   })
